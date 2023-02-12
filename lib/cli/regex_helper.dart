@@ -24,6 +24,6 @@ class CLIRegexHelper{
   static String exitMobile = "-/1" ;
 
 
-  static String readmeURL = "https://github.com/monki1/OpenAI_CLI/blob/main/README.md";
+  static String readmeURL = "https://gist.github.com/monki1/55dfbd2be7b79e07bb92e42109b102bf";
   static String readmeCommand = "(readme)";
 }
