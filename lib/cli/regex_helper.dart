@@ -3,10 +3,12 @@ class CLIRegexHelper{
   static String divider = "(:*)";
   static String accountCommand = "(account)";
   static String completionCommand = "(completion)";
-  static RegExp completionInputExp = RegExp("^ *$completionCommand *$divider *(?<input>.*)");
-  static RegExp accountInputExp = RegExp("^ *$accountCommand *$divider *((API_KEY: *(?<key>[\\S]+) *\nORG_ID: *(?<id>[\\S]+))? *\$)");
-  // String s = r"(?<key>)";
-
+  static RegExp completionInputExp = RegExp("^ *$completionCommand *$divider *(?<input>.*)\$");
+  // static RegExp accountInputExp = RegExp("^ *$accountCommand *$divider *"+ r'\n? *(API_KEY: *(?<key>[\S]+))? *\n? *(ORG_ID: *(?<id>[\S]+))? *$');
+  static RegExp accountInputExp = RegExp(r'^\s*account\s*:\s*(API_KEY:\s*\[(?<key>[^\]]*)\])?\s+(ORG_ID:\s*\[(?<id>[^\]]*)\])?\s*$');
+  // String s = r"(?<key>)"
+  static String editCommand = "(edit)";
+  static RegExp editInputExp = RegExp(r"^\s*(input:\s*\[(?<input>[^\]]*)\])?\s+(instruction:\s*\[(?<instruction>[^\]]*)\])?\s*$" );
 
 
 
@@ -15,5 +17,9 @@ class CLIRegexHelper{
   }
 
 
+  static List<String> releaseScopeCommands = [exit, exitConsole, exitMobile];
 
+  static String exit = "\$exit";
+  static String exitConsole = "^d";
+  static String exitMobile = "-/1" ;
 }

@@ -4,29 +4,42 @@ import 'package:openai_client/openai_client.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OpenAICredential{
-  static OpenAIClient? _client;
+  static OpenAICredential _instance = OpenAICredential._internal();
+  factory OpenAICredential() => _instance;
+  OpenAICredential._internal();
+   String _apiKey="";
+   String _orgID="";
+   OpenAIClient? _client;
 
 
 
-  static Future<String> getApiKey ()async {
+   Future<String> getApiKey ()async {
+    if(_apiKey != ""){return _apiKey;}
         String key = (await SharedPreferences.getInstance()).getString("openai_api_key") ?? "";
+    _apiKey = key;
+
         return key;
 
   }
-  static setApiKey(String key)async{
+   setApiKey(String key)async{
+    _apiKey = key;
     (await SharedPreferences.getInstance()).setString("openai_api_key", key);
-    _client = await _getClient();
+    // _client = await _getClient();
   }
-  static Future<String> getOrgID ()async {
+   Future<String> getOrgID ()async {
+    if(_orgID != ""){return _orgID;}
         String key = (await SharedPreferences.getInstance()).getString("openai_org_id") ?? "";
+    _orgID = key;
         return key;
   }
-  static setOrgID(String key)async{
+   setOrgID(String key)async{
+    _orgID = key;
     (await SharedPreferences.getInstance()).setString("openai_org_id", key);
-    _client = await _getClient();
+    // _client = await _getClient();
   }
 
-  static Future<OpenAIClient> _getClient()async{
+   Future<OpenAIClient> _getClient()async{
+     print("$_apiKey, $_orgID");
 
       return OpenAIClient(
         configuration: OpenAIConfiguration(
@@ -37,19 +50,12 @@ class OpenAICredential{
 
   }
 
-  static Future<OpenAIClient> get client async {
+   Future<OpenAIClient> get client async {
     _client ??= await _getClient();
     return _client!;
 }
 
 
-
-
-
-
-
-
-
-  //
-
 }
+
+

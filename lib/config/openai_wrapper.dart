@@ -18,11 +18,11 @@ class OpenAIWrapper{
     return response;
   }
 
-  Future<List<String>> edits(String intruction, String input)async{
+  Future<List<String>> edits(String instruction, String input)async{
       Edits edits_ = ( await client.edits
         .create(
       model: editsModel,
-      instruction: intruction,
+      instruction: instruction,
       input: input,
     )
         .data);

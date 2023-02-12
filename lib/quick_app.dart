@@ -3,7 +3,35 @@ import 'package:flutter/material.dart';
 
 class QuickApp extends StatelessWidget {
   StatelessWidget page;
-  ThemeData theme = ThemeData.dark();
+  ThemeData theme = ThemeData.dark().copyWith(
+    scaffoldBackgroundColor: Colors.black,
+    textTheme: const TextTheme(
+      bodySmall: TextStyle(
+        color: Colors.white,
+        fontSize: 20,
+      ),
+      bodyMedium: TextStyle(
+        color: Colors.white,
+        fontSize: 30,
+      ),
+      bodyLarge: TextStyle(
+        color: Colors.white,
+        fontSize: 40,
+      ),
+      titleLarge: TextStyle(
+        color: Colors.white,
+        fontSize: 40,
+      ),
+      titleSmall: TextStyle(
+        color: Colors.white,
+        fontSize: 20,
+      ),
+      titleMedium: TextStyle(
+        color: Colors.white,
+        fontSize: 30,
+      ),
+    ),
+  );
   QuickApp({required this.page ,super.key, ThemeData? theme_}){
     if(theme_ != null){
       this.theme = theme;

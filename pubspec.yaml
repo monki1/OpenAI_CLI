@@ -42,6 +42,8 @@ dependencies:
 
   command_line_interface:
     path: ../packages/command_line_interface
+#  common_widgets:
+#    path: ../packages
 
 dev_dependencies:
   flutter_test:

@@ -5,10 +5,14 @@ import 'dart:developer';
 
 import 'package:command_line_interface/command_line_interface.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:open_ai_cli/cli/regex_helper.dart';
+import 'package:open_ai_cli/ui/header.dart';
+// import 'package:open_ai_cli/style/style.dart';
 
 import '../config/openai_credential.dart';
 import '../config/openai_wrapper.dart';
+import '../ui/style.dart';
 
 class CompletionNode extends CommandNode{
   late CompletionFunctionNode node;
@@ -18,10 +22,19 @@ class CompletionNode extends CommandNode{
   Future<bool> interpret(String s) async {
     if(!scope.isActive(interpret)){
       scope.request(interpret);
-      String input = CLIRegexHelper.completionInputExp.firstMatch(s)!.namedGroup("input")?? "";
+      String input = CLIRegexHelper.completionInputExp.firstMatch(s)?.namedGroup("input")?? "";
+      controller.screen.content = [headerWidget("<< open ai completion",
+                                  (){dropText = CLIRegexHelper.exit;}),
+                                  ]+controller.screen.content;
+      controller.display.content = [];
+      dropText = "";
       return interpret(input);
     }
-    controller.display.content += [Text("prompt: $s")];
+
+    if(s.trim().isEmpty){
+      return true;
+    }
+    controller.display.content += [oacPromptWidget("prompt:\n   "+s)];
 
     node.complete(s);
 
@@ -39,10 +52,7 @@ class CompletionNode extends CommandNode{
 class CompletionFunctionNode extends FunctionNode {
   @override
   Future<List<String>> _complete(String input) async {
-    if (input == "") {
-      return [];
-    }
-    OpenAIWrapper wrapper = OpenAIWrapper(await OpenAICredential.client);
+    OpenAIWrapper wrapper = OpenAIWrapper(await OpenAICredential().client);
     return await wrapper.completion(input);
   }
 
@@ -50,8 +60,8 @@ class CompletionFunctionNode extends FunctionNode {
     List<String> completions = await _complete(input);
     String result = "-->\n";
     for (int i = 0; i < completions.length; i++) {
-      result += "${i + 1}. ${completions[i]}\n";
+      result += "   ${completions[i]}\n";
     }
-    controller.display.content += [Text(result)];
+    controller.display.content += [oacOutputWidget(result)];
   }
 }
