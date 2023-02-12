@@ -5,6 +5,7 @@ import 'package:open_ai_cli/ui/menu.dart';
 
 
 class OpenAICLI extends CLI{
+  String exitCode = CLIRegexHelper.exit;
   OpenAICLI(super.controller){
     scope.top = _scopeTop;
 
@@ -32,7 +33,7 @@ class OpenAICLI extends CLI{
 
 
   bool _scopeTop(String s){
-    if(CLIRegexHelper.releaseScopeCommands.contains(s)){
+    if(CLIRegexHelper.releaseScopeCommands.contains(s) || s == exitCode){
       scope.release();
       rootScreen();
       return true;
