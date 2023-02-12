@@ -1,14 +1,15 @@
 # openai_cli
-[Login/Register](https://openai.com/api/login/)
-[Get API KEY](https://platform.openai.com/account/api-keys)
-[Get ORG_ID](https://platform.openai.com/account/org-settings)
+- [Login / Register](https://openai.com/api/login/)
+- [Get API KEY](https://platform.openai.com/account/api-keys)
+- [Get ORG ID](https://platform.openai.com/account/org-settings)
 
-```
 
-[ THIS SOFTWARE DEPENDS ON:
-   openai_client: https://github.com/Azzeccagarbugli/openai_client/
-   
-   Copyright 2023 Francesco Coppola
+- source code: https://github.com/monki1/OpenAI_CLI
+- License: rights reserved, no responsibility, personal use ok.
+- THIS SOFTWARE DEPENDS ON:
+  - openai_client: https://github.com/Azzeccagarbugli/openai_client
+```   
+[  Copyright 2023 Francesco Coppola
    
    Redistribution and use in source and binary forms, with or without modification, are permitted
    provided that the following conditions are met:
@@ -32,4 +33,3 @@
    IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
    OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ]
-```
