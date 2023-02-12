@@ -5,10 +5,10 @@ class CLIRegexHelper{
   static String completionCommand = "(completion)";
   static RegExp completionInputExp = RegExp("^ *$completionCommand *$divider *(?<input>.*)\$");
   // static RegExp accountInputExp = RegExp("^ *$accountCommand *$divider *"+ r'\n? *(API_KEY: *(?<key>[\S]+))? *\n? *(ORG_ID: *(?<id>[\S]+))? *$');
-  static RegExp accountInputExp = RegExp(r'^\s*account\s*:\s*(API_KEY:\s*\[(?<key>[^\]]*)\])?\s+(ORG_ID:\s*\[(?<id>[^\]]*)\])?\s*$');
+  static RegExp accountInputExp = RegExp(r'^\s*account\s*:\s*(API_KEY:\s*\[\s*(?<key>[^\]\s]*)\s*\])?\s*(ORG_ID:\s*\[\s*(?<id>[^\]\s]*)\s*\])?\s*$');
   // String s = r"(?<key>)"
   static String editCommand = "(edit)";
-  static RegExp editInputExp = RegExp(r"^\s*(input:\s*\[(?<input>[^\]]*)\])?\s+(instruction:\s*\[(?<instruction>[^\]]*)\])?\s*$" );
+  static RegExp editInputExp = RegExp(r"^\s*(input:\s*\[\s*(?<input>[^\]\s]*)\s*\])?\s*(instruction:\s*\[\s*(?<instruction>[^\]\s]*)\s*\])?\s*$" );
 
 
 
@@ -22,4 +22,8 @@ class CLIRegexHelper{
   static String exit = "\$exit";
   static String exitConsole = "^d";
   static String exitMobile = "-/1" ;
+
+
+  static String readmeURL = "https://github.com/monki1/OpenAI_CLI/blob/main/README.md";
+  static String readmeCommand = "(readme)";
 }
