@@ -52,15 +52,23 @@ BoxDecoration headerBoxDecoration = BoxDecoration(
 );
 
 Widget oacPromptWidget(String s) {
-  return SelectableText(
-    s,
-    style: openAICLIPromptTextStyle,
+  return
+  Container(
+  padding: EdgeInsets.all(6),
+  child:
+      SelectableText(
+      s,
+      style: openAICLIPromptTextStyle,
+    )
   );
 }
 Widget oacOutputWidget(String s) {
-  return SelectableText(
-    s,
-    style: openAICLIOutputTextStyle,
+  return Container(
+      padding: EdgeInsets.all(6),
+  child:SelectableText(
+      s,
+      style: openAICLIOutputTextStyle,
+    )
   );
 }
 

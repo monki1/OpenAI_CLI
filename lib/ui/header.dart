@@ -7,8 +7,8 @@ import 'package:open_ai_cli/ui/style.dart';
 
 Widget headerWidget(String s, Function f){
   Widget w = Container(
-      margin: EdgeInsets.all(2),
-      padding: EdgeInsets.all(5),
+      // margin: EdgeInsets.all(2),
+      padding: EdgeInsets.all(10),
       width: double.infinity,
       alignment: Alignment.center,
       decoration: headerBoxDecoration,
