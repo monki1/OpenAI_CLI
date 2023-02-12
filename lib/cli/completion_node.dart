@@ -13,9 +13,10 @@ import 'package:open_ai_cli/ui/header.dart';
 import '../config/openai_credential.dart';
 import '../config/openai_wrapper.dart';
 import '../ui/style.dart';
+import 'open_ai_cli_node.dart';
 
-class CompletionNode extends CommandNode{
-  late CompletionFunctionNode node;
+class CompletionNode extends OpenAICLINode{
+  // late CompletionFunctionNode node;
   // = CompletionFunctionNode();
   CompletionNode();
   @override
@@ -36,7 +37,7 @@ class CompletionNode extends CommandNode{
     }
     controller.display.content += [oacPromptWidget("prompt:\n   "+s)];
 
-    node.complete(s);
+    (node as CompletionFunctionNode).complete(s);
 
     return true;
   }

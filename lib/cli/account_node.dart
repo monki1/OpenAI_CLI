@@ -2,9 +2,10 @@ import 'package:command_line_interface/command_line_interface.dart';
 import 'package:open_ai_cli/cli/regex_helper.dart';
 
 import '../config/openai_credential.dart';
+import 'open_ai_cli_node.dart';
 
-class AccountNode extends CommandNode{
-  late AccountFunctionNode node;
+class AccountNode extends OpenAICLINode{
+  // late AccountFunctionNode node;
   // = AccountFunctionNode();
   AccountNode();
 
@@ -21,7 +22,7 @@ class AccountNode extends CommandNode{
     // }
     String key = match?.namedGroup("key")?? "";
     String id = match?.namedGroup("id")?? "";
-    node.interpret(key, id);
+    (node as AccountFunctionNode).interpret(key, id);
     print("key: $key, id: $id");
 
     return Future.value(false);
@@ -46,7 +47,7 @@ class AccountFunctionNode extends FunctionNode{
     String apiKey = await OpenAICredential().getApiKey();
     String orgID = await OpenAICredential().getOrgID();
 
-    dropText = "account: \nAPI_KEY:\[ $apiKey\] \nORG_ID:\[ $orgID\]";
+    dropText = "account: \nAPI_KEY:[\n$apiKey\n] \nORG_ID:[\n$orgID\n]";
 
   }
 

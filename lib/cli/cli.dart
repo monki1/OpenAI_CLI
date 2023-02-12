@@ -12,6 +12,7 @@ class OpenAICLI extends CLI{
   @override
   void interpret(String s){
     if(s.isEmpty){return rootScreen();}
+
     super.interpret(s);
   }
 
@@ -19,6 +20,7 @@ class OpenAICLI extends CLI{
   @override
   void rootScreen() {
     List<Widget> wlst = [
+    menuWidget("readme", (){interpret("readme:");}),
     menuWidget("account", (){interpret("account:");}),
     menuWidget("completion", (){interpret("completion:");}),
     menuWidget("edit", (){interpret("edit:");}),

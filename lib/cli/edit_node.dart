@@ -13,9 +13,10 @@ import '../config/openai_credential.dart';
 import '../config/openai_wrapper.dart';
 import '../ui/header.dart';
 import '../ui/style.dart';
+import 'open_ai_cli_node.dart';
 
-class EditNode extends CommandNode{
-  late EditFunctionNode node;
+class EditNode extends OpenAICLINode{
+  // late EditFunctionNode node;
   // = EditFunctionNode();
   EditNode();
   @override
@@ -32,7 +33,7 @@ class EditNode extends CommandNode{
       return interpret(input);
     }
     if(s.trim().isNotEmpty) {
-      controller.display.content += [SelectableText("prompt: $s")];
+      controller.display.content += [oacOutputWidget("prompt: $s")];
     }
     String input = CLIRegexHelper.editInputExp.firstMatch(s)?.namedGroup("input")?? "";
     String instruction = CLIRegexHelper.editInputExp.firstMatch(s)?.namedGroup("instruction")?? "";
@@ -40,7 +41,7 @@ class EditNode extends CommandNode{
     //   // controller.display.content += [SelectableText("INPUT INCOMPLETE")];
     //   return true;
     // }
-    node.edit(instruction, input);
+    (node as EditFunctionNode).edit(instruction, input);
 
     return true;
   }
@@ -60,7 +61,7 @@ class EditFunctionNode extends FunctionNode {
   }
 
   edit(String instruction, String input) async {
-    dropText = "input:[ ] \ninstruction:[ ]";
+    dropText = "input:[\n\n] \ninstruction:[\n\n]";
     // controller.input.textEditingController.selection.pos
 
     if((instruction.isEmpty || input.isEmpty)){
