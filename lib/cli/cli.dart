@@ -6,7 +6,7 @@ import 'package:open_ai_cli/ui/menu.dart';
 
 class OpenAICLI extends CLI{
   String exitCode = CLIRegexHelper.exit;
-  OpenAICLI(super.controller);
+  OpenAICLI(CLIController controller_) : super(controller_);
 
 
   @override
@@ -23,16 +23,7 @@ class OpenAICLI extends CLI{
     super.controller.screen.content = [controller.display.widget, controller.input.widget];
     controller.display.content = wlst;
   }
-  // @override
-  // bool _topInterpreter(String s) {
-  
-  //   if(CLIRegexHelper.releaseScopeCommands.contains(s) || s == exitCode){
-  //     releaseScope();
-  //     loadScreen();
-  //     return true;
-  //   }
-  //   return false;
-  // }
+
 
 }
 

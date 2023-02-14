@@ -5,9 +5,12 @@ import '../config/openai_credential.dart';
 import 'open_ai_cli_node.dart';
 
 class AccountNode extends OpenAICLINode{
+
+
+  AccountNode(super.node);
   // late AccountFunctionNode node;
   // = AccountFunctionNode();
-  AccountNode();
+
 
   @override
   Future<bool> interpret(String s) {

@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+// import 'package:overlay_support/overlay_support.dart';
 
 Widget gestureWidget(Widget widget, {Function()? onTap, Function()? onSwipeRight, Function()? onSwipeLeft, Function()? onDoubleTap, Function()? onLongPress, Color? color}){
   return GestureDetector(
@@ -16,3 +18,11 @@ Widget gestureWidget(Widget widget, {Function()? onTap, Function()? onSwipeRight
     child: widget,
   );
 }
+// void showClipboardNotification() {
+//   {
+//     showSimpleNotification(
+//       const Text("url copied to clipboard"),
+//       background: Colors.purple,
+//     );
+//   }
+// }

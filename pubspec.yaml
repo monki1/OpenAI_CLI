@@ -42,6 +42,9 @@ dependencies:
 
   command_line_interface:
     path: ../packages/command_line_interface
+  clipboard: ^0.1.3
+  overlay_support: ^1.1.3
+#  overlay_notification: ^0.0.1
 #  common_widgets:
 #    path: ../packages
 

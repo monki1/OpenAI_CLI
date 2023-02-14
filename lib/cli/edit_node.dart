@@ -15,15 +15,17 @@ import '../ui/style.dart';
 import 'open_ai_cli_node.dart';
 
 class EditNode extends OpenAICLINode{
+
+  EditNode(super.node);
   // late EditFunctionNode node;
   // = EditFunctionNode();
-  EditNode();
+
   @override
   Future<bool> interpret(String s) async {
     if(!scope.isActive(interpret)){
-      Function release =  scope.request(interpret);
+      requestScope();
       controller.screen.content = [headerWidget("open ai edit", (){
-        release();scope.interpret("");
+        scope.releaseActive() ;scope.interpret("");dropText = "";
       })]+controller.screen.content;
       controller.display.content = [];
       List<String> args =  s.split(CLIRegexHelper.divider);

@@ -20,7 +20,7 @@ Future<void> main() async {
   controller.input.textStyle = oacInputTextStyle;
 
 
-  OpenAICLI openAICLI = initOpenAICLI(controller);
+  OpenAICLI openAICLI = await initOpenAICLI(controller);
 
 /// listen to input
   controller.input.onSubmit.listen(openAICLI.scope.interpret);
@@ -40,11 +40,11 @@ Future<void> main() async {
   )));
 }
 
-OpenAICLI initOpenAICLI(CLIController controller) {
-    OpenAICLI openAICLI = OpenAICLI(controller);
-  AccountNode accountNode = AccountNode();
-  CompletionNode completionNode = CompletionNode();
-  EditNode editNode = EditNode();
+Future<OpenAICLI> initOpenAICLI(CLIController controller) async {
+  OpenAICLI openAICLI = OpenAICLI(controller);
+  AccountNode accountNode = AccountNode(AccountFunctionNode());
+  CompletionNode completionNode = CompletionNode(CompletionFunctionNode());
+  EditNode editNode = EditNode(EditFunctionNode());
   ReadMeNode readMeNode = ReadMeNode();
 
   openAICLI.add(accountNode);
@@ -52,14 +52,6 @@ OpenAICLI initOpenAICLI(CLIController controller) {
   openAICLI.add(editNode);
   openAICLI.add(readMeNode);
 
-  AccountFunctionNode accountFunctionNode = AccountFunctionNode();
-  accountNode.adopt(accountFunctionNode);
-
-  CompletionFunctionNode completionFunctionNode = CompletionFunctionNode();
-  completionNode.adopt(completionFunctionNode);
-  
-  EditFunctionNode editFunctionNode = EditFunctionNode();
-  editNode.adopt(editFunctionNode);
   return openAICLI;
 
 }

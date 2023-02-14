@@ -14,16 +14,18 @@ import '../ui/style.dart';
 import 'open_ai_cli_node.dart';
 
 class CompletionNode extends OpenAICLINode{
-  // late CompletionFunctionNode node;
-  // = CompletionFunctionNode();
-  CompletionNode();
+
+
+  CompletionNode(super.node);
+
   @override
   Future<bool> interpret(String s) async {
     if(!scope.isActive(interpret)){
-      Function release =  scope.request(interpret);
+      requestScope();
       String input = CLIRegexHelper.completionInputExp.firstMatch(s)?.namedGroup("input")?? "";
       controller.screen.content = [headerWidget("open ai completion",
-                                  (){release();scope.interpret("");}),
+                                  (){scope.releaseActive();scope.interpret(""); dropText = "";
+      })
                                   ]+controller.screen.content;
       controller.display.content = [];
       dropText = "";
