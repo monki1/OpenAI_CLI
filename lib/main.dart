@@ -18,7 +18,30 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   CLIController controller = CLIController();
   controller.input.textStyle = oacInputTextStyle;
-  OpenAICLI openAICLI = OpenAICLI(controller);
+
+
+  OpenAICLI openAICLI = initOpenAICLI(controller);
+
+/// listen to input
+  controller.input.onSubmit.listen(openAICLI.scope.interpret);
+  controller.input.onChange.listen(openAICLI.scope.listenToChange);
+
+
+///set screen content
+  controller.screen.content = [controller.display.widget, controller.input.widget];
+  openAICLI.loadScreen();
+
+
+
+
+  runApp(QuickApp(
+      page: QuickPage(
+        body: controller.screen.widget,
+  )));
+}
+
+OpenAICLI initOpenAICLI(CLIController controller) {
+    OpenAICLI openAICLI = OpenAICLI(controller);
   AccountNode accountNode = AccountNode();
   CompletionNode completionNode = CompletionNode();
   EditNode editNode = EditNode();
@@ -30,24 +53,13 @@ Future<void> main() async {
   openAICLI.add(readMeNode);
 
   AccountFunctionNode accountFunctionNode = AccountFunctionNode();
-  accountNode.node = accountFunctionNode;
   accountNode.adopt(accountFunctionNode);
+
   CompletionFunctionNode completionFunctionNode = CompletionFunctionNode();
-  completionNode.node = completionFunctionNode;
   completionNode.adopt(completionFunctionNode);
+  
   EditFunctionNode editFunctionNode = EditFunctionNode();
   editNode.adopt(editFunctionNode);
+  return openAICLI;
 
-
-
-  controller.screen.content = [controller.display.widget, controller.input.widget];
-  openAICLI.rootScreen();
-
-
-
-
-  runApp(QuickApp(
-      page: QuickPage(
-        body: controller.screen.widget,
-  )));
 }
