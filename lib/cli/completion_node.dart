@@ -4,8 +4,6 @@
 import 'dart:developer';
 
 import 'package:command_line_interface/command_line_interface.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:open_ai_cli/cli/regex_helper.dart';
 import 'package:open_ai_cli/ui/header.dart';
 // import 'package:open_ai_cli/style/style.dart';
@@ -22,10 +20,10 @@ class CompletionNode extends OpenAICLINode{
   @override
   Future<bool> interpret(String s) async {
     if(!scope.isActive(interpret)){
-      scope.request(interpret);
+      Function release =  scope.request(interpret);
       String input = CLIRegexHelper.completionInputExp.firstMatch(s)?.namedGroup("input")?? "";
-      controller.screen.content = [headerWidget("<< open ai completion",
-                                  (){dropText = CLIRegexHelper.exit;}),
+      controller.screen.content = [headerWidget("open ai completion",
+                                  (){release();scope.interpret("");}),
                                   ]+controller.screen.content;
       controller.display.content = [];
       dropText = "";

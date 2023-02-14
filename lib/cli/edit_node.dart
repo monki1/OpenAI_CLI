@@ -4,8 +4,7 @@
 import 'dart:developer';
 
 import 'package:command_line_interface/command_line_interface.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+
 import 'package:open_ai_cli/cli/regex_helper.dart';
 // import 'package:open_ai_cli/style/style.dart';
 
@@ -22,9 +21,9 @@ class EditNode extends OpenAICLINode{
   @override
   Future<bool> interpret(String s) async {
     if(!scope.isActive(interpret)){
-      scope.request(interpret);
-      controller.screen.content = [headerWidget("<<<      open ai edit", (){
-        dropText = CLIRegexHelper.exit;
+      Function release =  scope.request(interpret);
+      controller.screen.content = [headerWidget("open ai edit", (){
+        release();scope.interpret("");
       })]+controller.screen.content;
       controller.display.content = [];
       List<String> args =  s.split(CLIRegexHelper.divider);
@@ -33,7 +32,7 @@ class EditNode extends OpenAICLINode{
       return interpret(input);
     }
     if(s.trim().isNotEmpty) {
-      controller.display.content += [oacOutputWidget("prompt: $s")];
+      controller.display.content += [oacPromptWidget("prompt: $s")];
     }
     String input = CLIRegexHelper.editInputExp.firstMatch(s)?.namedGroup("input")?? "";
     String instruction = CLIRegexHelper.editInputExp.firstMatch(s)?.namedGroup("instruction")?? "";
@@ -63,6 +62,7 @@ class EditFunctionNode extends FunctionNode {
   edit(String instruction, String input) async {
     dropText = "input:[\n\n] \ninstruction:[\n\n]";
     // controller.input.textEditingController.selection.pos
+    print(instruction+" "+input);
 
     if((instruction.isEmpty || input.isEmpty)){
       if(!(instruction.isEmpty && input.isEmpty)){
