@@ -7,16 +7,10 @@ import 'package:open_ai_cli/ui/menu.dart';
 class OpenAICLI extends CLI{
   String exitCode = CLIRegexHelper.exit;
   OpenAICLI(super.controller);
-  @override
-  interpret(String s)async{
-    if(s.isEmpty){return rootScreen();}
-
-    super.interpret(s);
-  }
 
 
   @override
-  void rootScreen() {
+  loadScreen() {
     List<Widget> wlst = [
 
     menuWidget("- completion", (){interpret("completion:");}),
@@ -29,19 +23,17 @@ class OpenAICLI extends CLI{
     super.controller.screen.content = [controller.display.widget, controller.input.widget];
     controller.display.content = wlst;
   }
+  // @override
+  // bool _topInterpreter(String s) {
+  
+  //   if(CLIRegexHelper.releaseScopeCommands.contains(s) || s == exitCode){
+  //     releaseScope();
+  //     loadScreen();
+  //     return true;
+  //   }
+  //   return false;
+  // }
 
-  @override
-  bool _topInterpreter(String s){
-    if(CLIRegexHelper.releaseScopeCommands.contains(s) || s == exitCode){
-
-      rootScreen();
-      return true;
-    }
-    return false;
-  }
 }
 
 
-
-
-//regex helper
