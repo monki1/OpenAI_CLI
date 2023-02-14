@@ -6,12 +6,9 @@ import 'package:open_ai_cli/ui/menu.dart';
 
 class OpenAICLI extends CLI{
   String exitCode = CLIRegexHelper.exit;
-  OpenAICLI(super.controller){
-    scope.top = _scopeTop;
-
-  }
+  OpenAICLI(super.controller);
   @override
-  void interpret(String s){
+  interpret(String s)async{
     if(s.isEmpty){return rootScreen();}
 
     super.interpret(s);
@@ -21,20 +18,22 @@ class OpenAICLI extends CLI{
   @override
   void rootScreen() {
     List<Widget> wlst = [
-    menuWidget("readme", (){interpret("readme:");}),
-    menuWidget("account", (){interpret("account:");}),
-    menuWidget("completion", (){interpret("completion:");}),
-    menuWidget("edit", (){interpret("edit:");}),
+
+    menuWidget("- completion", (){interpret("completion:");}),
+    menuWidget("- edit", (){interpret("edit:");}),
+      menuWidget("  account", (){interpret("account:");}),
+      menuWidget("  readme", (){interpret("readme:");}),
+
     ];
 
-    controller.screen.content = [controller.display.widget, controller.input.widget];
+    super.controller.screen.content = [controller.display.widget, controller.input.widget];
     controller.display.content = wlst;
   }
 
-
-  bool _scopeTop(String s){
+  @override
+  bool _topInterpreter(String s){
     if(CLIRegexHelper.releaseScopeCommands.contains(s) || s == exitCode){
-      scope.release();
+
       rootScreen();
       return true;
     }
