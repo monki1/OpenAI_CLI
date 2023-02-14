@@ -17,11 +17,11 @@ class CLIRegexHelper{
   }
 
 
-  static List<String> releaseScopeCommands = [exit, exitConsole, exitMobile];
-
-  static String exit = "\$exit";
-  static String exitConsole = "^d";
-  static String exitMobile = "-/1" ;
+  // static List<String> releaseScopeCommands = [exit, exitConsole, exitMobile];
+  //
+  // static String exit = "\$exit";
+  // static String exitConsole = "^d";
+  // static String exitMobile = "-/1" ;
 
 
   static String readmeURL = "https://gist.github.com/monki1/55dfbd2be7b79e07bb92e42109b102bf";
