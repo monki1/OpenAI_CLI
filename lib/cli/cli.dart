@@ -6,7 +6,6 @@ import '../regex_helper.dart';
 
 
 class OpenAICLI extends CLI{
-  String exitCode = CLIRegexHelper.exit;
   OpenAICLI(CLIController controller_) : super(controller_);
 
 
