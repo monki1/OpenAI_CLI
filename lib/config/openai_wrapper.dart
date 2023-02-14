@@ -9,8 +9,8 @@ class OpenAIWrapper{
   OpenAIWrapper(this.client);
 
   Future<List<String>> completion(String s)async{
-    Completion completion = (await (await client.completions.
-    create(model: completionModel, prompt: s, maxTokens: completionMaxTokens)).data);
+    Completion completion = (await client.completions.
+    create(model: completionModel, prompt: s, maxTokens: completionMaxTokens).data);
    List <String> response =[] ;
     for (var choice in completion.choices) {
     response += [choice.text.trim()];

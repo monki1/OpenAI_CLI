@@ -5,16 +5,16 @@ import 'dart:developer';
 
 import 'package:command_line_interface/command_line_interface.dart';
 
-import 'package:open_ai_cli/cli/regex_helper.dart';
 // import 'package:open_ai_cli/style/style.dart';
 
 import '../config/openai_credential.dart';
 import '../config/openai_wrapper.dart';
+import '../regex_helper.dart';
 import '../ui/header.dart';
 import '../ui/style.dart';
 import 'open_ai_cli_node.dart';
 
-class EditNode extends OpenAICLINode{
+class EditNode extends OACNode{
 
   EditNode(super.node);
   // late EditFunctionNode node;

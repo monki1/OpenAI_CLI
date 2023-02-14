@@ -4,16 +4,16 @@
 import 'dart:developer';
 
 import 'package:command_line_interface/command_line_interface.dart';
-import 'package:open_ai_cli/cli/regex_helper.dart';
 import 'package:open_ai_cli/ui/header.dart';
 // import 'package:open_ai_cli/style/style.dart';
 
 import '../config/openai_credential.dart';
 import '../config/openai_wrapper.dart';
+import '../regex_helper.dart';
 import '../ui/style.dart';
 import 'open_ai_cli_node.dart';
 
-class CompletionNode extends OpenAICLINode{
+class CompletionNode extends OACNode{
 
 
   CompletionNode(super.node);
@@ -24,7 +24,8 @@ class CompletionNode extends OpenAICLINode{
       requestScope();
       String input = CLIRegexHelper.completionInputExp.firstMatch(s)?.namedGroup("input")?? "";
       controller.screen.content = [headerWidget("open ai completion",
-                                  (){scope.releaseActive();scope.interpret(""); dropText = "";
+                                  (){scope.releaseActive();scope.interpret("");
+        // dropText = "";
       })
                                   ]+controller.screen.content;
       controller.display.content = [];
@@ -51,7 +52,6 @@ class CompletionNode extends OpenAICLINode{
 }
 
 class CompletionFunctionNode extends FunctionNode {
-  @override
   Future<List<String>> _complete(String input) async {
     OpenAIWrapper wrapper = OpenAIWrapper(await OpenAICredential().client);
     return await wrapper.completion(input);

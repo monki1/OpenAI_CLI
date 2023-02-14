@@ -1,10 +1,10 @@
 import 'package:command_line_interface/command_line_interface.dart';
-import 'package:open_ai_cli/cli/regex_helper.dart';
 
 import '../config/openai_credential.dart';
+import '../regex_helper.dart';
 import 'open_ai_cli_node.dart';
 
-class AccountNode extends OpenAICLINode{
+class AccountNode extends OACNode{
 
 
   AccountNode(super.node);
@@ -15,12 +15,12 @@ class AccountNode extends OpenAICLINode{
   @override
   Future<bool> interpret(String s) {
     // throw UnimplementedError();
-    if(!scope.isActive(interpret)){
-      scope.request(interpret);
-      controller.display.content = [];
-      dropText = "";
-      return interpret(s);
-    }
+    // if(!scope.isActive(interpret)){
+    //   scope.request(interpret);
+    //   controller.display.content = [];
+    //   dropText = "";
+    //   return interpret(s);
+    // }
     RegExpMatch? match = CLIRegexHelper.accountInputExp.firstMatch(s);
     // }
     String key = match?.namedGroup("key")?? "";

@@ -2,9 +2,9 @@
 
 import 'package:command_line_interface/command_line_interface.dart';
 
-abstract class OpenAICLINode extends CommandNode{
+abstract class OACNode extends CommandNode{
   FunctionNode node;
-  OpenAICLINode(this.node);
+  OACNode(this.node);
 
   @override
   getAdopted(CLINode node_) {

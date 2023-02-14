@@ -1,7 +1,8 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:command_line_interface/command_line_interface.dart';
 
-import 'package:open_ai_cli/cli/regex_helper.dart';
+
+import '../regex_helper.dart';
 
 
 

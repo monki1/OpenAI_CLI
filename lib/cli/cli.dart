@@ -1,7 +1,8 @@
 import 'package:command_line_interface/command_line_interface.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:open_ai_cli/cli/regex_helper.dart';
 import 'package:open_ai_cli/ui/menu.dart';
+
+import '../regex_helper.dart';
 
 
 class OpenAICLI extends CLI{
@@ -11,7 +12,11 @@ class OpenAICLI extends CLI{
 
   @override
   loadScreen() {
-    List<Widget> wlst = [
+    List<Widget> header = [];
+    if(releaseParentScope != null){
+      header.add(menuWidget("open ai cli", (){releaseParentScope!();}));
+    }
+    List<Widget> wlst = header + [
 
     menuWidget("- completion", (){interpret("completion:");}),
     menuWidget("- edit", (){interpret("edit:");}),
