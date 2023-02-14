@@ -23,7 +23,7 @@ class AccountNode extends OpenAICLINode{
     String key = match?.namedGroup("key")?? "";
     String id = match?.namedGroup("id")?? "";
     (node as AccountFunctionNode).interpret(key, id);
-    print("key: $key, id: $id");
+
 
     return Future.value(false);
   }
@@ -37,17 +37,20 @@ class AccountNode extends OpenAICLINode{
 
 class AccountFunctionNode extends FunctionNode{
 
-  interpret(String apiKey_, String orgID_) async {
+  interpret(String apiKey, String orgID) async {
     //if both are not empty, set them
-    if(!(apiKey_ == "" || orgID_ == "")){
-      await OpenAICredential().setApiKey(apiKey_);
-      await OpenAICredential().setOrgID(orgID_);
+    if(apiKey.isNotEmpty){
+      await OpenAICredential().setApiKey(apiKey);
     }
-
-    String apiKey = await OpenAICredential().getApiKey();
-    String orgID = await OpenAICredential().getOrgID();
-
-    dropText = "account: \nAPI_KEY:[\n$apiKey\n] \nORG_ID:[\n$orgID\n]";
+    if(orgID.isNotEmpty){
+      await OpenAICredential().setOrgID(orgID);
+    }
+    String _apiKey = await OpenAICredential().getApiKey();
+    String _orgID = await OpenAICredential().getOrgID();
+    if(apiKey.isNotEmpty&&orgID.isNotEmpty){
+      return;
+    }
+    dropText = "account: \nAPI_KEY:[\n$_apiKey\n] \nORG_ID:[\n$_orgID\n]";
 
   }
 
